@@ -161,15 +161,15 @@ public class HostDatabase extends RobustSQLiteOpenHelper implements HostStorage,
 			+ FIELD_COLOR_NUMBER + " = ?";
 
 	static {
-		addTableName(TABLE_HOSTS);
-		addTableName(TABLE_KNOWNHOSTS);
-		addIndexName(TABLE_KNOWNHOSTS + FIELD_KNOWNHOSTS_HOSTID + "index");
-		addTableName(TABLE_PORTFORWARDS);
-		addIndexName(TABLE_PORTFORWARDS + FIELD_PORTFORWARD_HOSTID + "index");
-		addTableName(TABLE_COLORS);
-		addIndexName(TABLE_COLORS + FIELD_COLOR_SCHEME + "index");
-		addTableName(TABLE_COLOR_DEFAULTS);
-		addIndexName(TABLE_COLOR_DEFAULTS + FIELD_COLOR_SCHEME + "index");
+		RobustSQLiteOpenHelper.addTableName(TABLE_HOSTS);
+		RobustSQLiteOpenHelper.addTableName(TABLE_KNOWNHOSTS);
+		RobustSQLiteOpenHelper.addIndexName(TABLE_KNOWNHOSTS + FIELD_KNOWNHOSTS_HOSTID + "index");
+		RobustSQLiteOpenHelper.addTableName(TABLE_PORTFORWARDS);
+		RobustSQLiteOpenHelper.addIndexName(TABLE_PORTFORWARDS + FIELD_PORTFORWARD_HOSTID + "index");
+		RobustSQLiteOpenHelper.addTableName(TABLE_COLORS);
+		RobustSQLiteOpenHelper.addIndexName(TABLE_COLORS + FIELD_COLOR_SCHEME + "index");
+		RobustSQLiteOpenHelper.addTableName(TABLE_COLOR_DEFAULTS);
+		RobustSQLiteOpenHelper.addIndexName(TABLE_COLOR_DEFAULTS + FIELD_COLOR_SCHEME + "index");
 	}
 
 	/** Used during upgrades from DB version 23 to 24. */

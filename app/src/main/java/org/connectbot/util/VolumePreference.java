@@ -19,6 +19,8 @@ package org.connectbot.util;
 
 import org.connectbot.R;
 
+import org.connectbot.util.PreferenceConstants;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import androidx.preference.DialogPreference;

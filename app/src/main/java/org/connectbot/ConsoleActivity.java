@@ -50,6 +50,8 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
+
+import com.connectbot.TerminalView;
 import com.google.android.material.tabs.TabLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.MenuItemCompat;

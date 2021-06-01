@@ -1,21 +1,22 @@
-buildscript {
-	dependencies {
-		if (rootProject.hasProperty('jacocoVersion')) {
-			classpath "org.jacoco:org.jacoco.core:${rootProject.jacocoVersion}"
-		}
-	}
-}
+//buildscript {
+//	dependencies {
+//		if (rootProject.hasProperty('jacocoVersion')) {
+//			classpath "org.jacoco:org.jacoco.core:${rootProject.jacocoVersion}"
+//		}
+//	}
+//}
+//
+//plugins {
+//	id 'com.github.ben-manes.versions' version '0.42.0'
+//	id 'net.ltgt.errorprone' version '2.0.2'
+//	id 'com.gladed.androidgitversion' version '0.4.14'
+//	id 'com.github.kt3k.coveralls' version '2.12.0'
+//	id 'com.github.johnrengelman.processes' version '0.5.0'
+//}
 
-plugins {
-	id 'com.android.application' version '7.3.0'
-	id 'com.github.ben-manes.versions' version '0.42.0'
-	id 'net.ltgt.errorprone' version '2.0.2'
-	id 'com.gladed.androidgitversion' version '0.4.14'
-	id 'com.github.kt3k.coveralls' version '2.12.0'
-	id 'com.github.johnrengelman.processes' version '0.5.0'
-	id 'com.hiya.jacoco-android' version '0.2'
-	id 'com.starter.easylauncher' version "5.1.2"
-}
+apply plugin: 'com.android.application'
+//apply plugin: 'com.diffplug.spotless'
+apply from: '../config/quality.gradle'
 
 ext {
 	supportLibraryVersion = '1.2.1'
@@ -23,23 +24,20 @@ ext {
 	espressoVersion = '3.4.0'
 }
 
-apply plugin: 'com.diffplug.spotless'
-apply from: '../config/quality.gradle'
+//coveralls.jacocoReportPath = 'build/reports/coverage/google/debug/report.xml'
 
-coveralls.jacocoReportPath = 'build/reports/coverage/google/debug/report.xml'
-
-androidGitVersion {
-	prefix = "v"
-	codeFormat = 'MMNNPPBBB'
-}
+//androidGitVersion {
+//	prefix = "v"
+//	codeFormat = 'MMNNPPBBB'
+//}
 
 android {
 	compileSdkVersion 31
 
 	defaultConfig {
 		applicationId "org.connectbot"
-		versionName androidGitVersion.name()
-		versionCode androidGitVersion.code()
+//		versionName androidGitVersion.name()
+//		versionCode androidGitVersion.code()
 
 		minSdkVersion 21
 		targetSdkVersion 31
@@ -127,8 +125,6 @@ android {
 		exclude '**/*.gwt.xml'
 	}
 
-	externalNativeBuild { cmake { path 'CMakeLists.txt' } }
-
 	jacoco {
 		if (rootProject.hasProperty('jacocoVersion')) {
 			version "${rootProject.jacocoVersion}"
@@ -136,37 +132,12 @@ android {
 	}
 }
 
-spotless {
-	java {
-		target '**/*.java'
-		removeUnusedImports()
-	}
-}
-
-import com.github.jengelman.gradle.plugins.processes.tasks.Fork
-import net.ltgt.gradle.errorprone.CheckSeverity
-
-tasks.withType(JavaCompile) {
-	options.errorprone {
-		check("InvalidInlineTag", CheckSeverity.OFF)
-		check("AlmostJavadoc", CheckSeverity.OFF)
-		check("EmptyBlockTag", CheckSeverity.OFF)
-		check("MissingSummary", CheckSeverity.OFF)
-		check("ClassCanBeStatic", CheckSeverity.OFF)
-		check("ClassNewInstance", CheckSeverity.OFF)
-		check("DefaultCharset", CheckSeverity.OFF)
-		check("SynchronizeOnNonFinalField", CheckSeverity.OFF)
-		excludedPaths = '.*/app/src/main/java/de/mud/.*|' +
-				'.*/app/src/main/java/org/apache/.*|' +
-				'.*/app/src/main/java/org/keyczar/.*'
-	}
-}
-
-tasks.withType(Test) {
-	jacoco.includeNoLocationClasses = true
-	jacoco.excludes = ['jdk.internal.*']
-	// needed for Java 11 https://github.com/gradle/gradle/issues/5184#issuecomment-457865951
-}
+//spotless {
+//	java {
+//		target '**/*.java'
+//		removeUnusedImports()
+//	}
+//}
 
 /*
  * This works around a deficiency in ddmlib's 
@@ -174,57 +145,28 @@ tasks.withType(Test) {
  * other than 127.0.0.1 for the host of ADB. This allows us to run tests
  * in a Docker container but forward to a real device.
  */
-task startAdbForwarding(type: Fork) {
-	onlyIf { System.getenv("ANDROID_ADB_SERVER_ADDRESS") != null }
-
-	def androidAdbServerAddress = System.getenv("ANDROID_ADB_SERVER_ADDRESS")
-	commandLine 'socat', 'TCP-LISTEN:5037,reuseaddr,fork', "TCP:${androidAdbServerAddress}:5037"
-}
-
-task stopAdbForwarding {
-	onlyIf { System.getenv("ANDROID_ADB_SERVER_ADDRESS") != null }
-	doLast {
-		startAdbForwarding.processHandle.abort()
-	}
-}
-
-afterEvaluate {
-	tasks.all { t ->
-		if (t.name.startsWith("connected") && t.name.endsWith("AndroidTest")) {
-			t.dependsOn(startAdbForwarding)
-			t.finalizedBy(stopAdbForwarding)
-		}
-	}
-}
-
-// Do not want any release candidates for updates.
-dependencyUpdates {
-	revision = "release"
-	checkForGradleUpdate = false
-	//noinspection DuplicatePlatformClasses
-	outputFormatter = "json"
-
-	// Android apparently marks their "alpha" as "release" so we have to reject them.
-	resolutionStrategy {
-		componentSelection { rules ->
-			rules.all { ComponentSelection selection ->
-				boolean rejected = [
-						'alpha',
-						'beta',
-						'rc',
-						'cr',
-						'm',
-						'preview'
-				].any { qualifier ->
-					selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
-				}
-				if (rejected) {
-					selection.reject('Release candidate')
-				}
-			}
-		}
-	}
-}
+//task startAdbForwarding(type: Fork) {
+//	onlyIf { System.getenv("ANDROID_ADB_SERVER_ADDRESS") != null }
+//
+//	def androidAdbServerAddress = System.getenv("ANDROID_ADB_SERVER_ADDRESS")
+//	commandLine 'socat', 'TCP-LISTEN:5037,reuseaddr,fork', "TCP:${androidAdbServerAddress}:5037"
+//}
+//
+//task stopAdbForwarding {
+//	onlyIf { System.getenv("ANDROID_ADB_SERVER_ADDRESS") != null }
+//	doLast {
+//		startAdbForwarding.processHandle.abort()
+//	}
+//}
+//
+//afterEvaluate {
+//	tasks.all { t ->
+//		if (t.name.startsWith("connected") && t.name.endsWith("AndroidTest")) {
+//			t.dependsOn(startAdbForwarding)
+//			t.finalizedBy(stopAdbForwarding)
+//		}
+//	}
+//}
 
 // Dependencies must be below the android block to allow productFlavor specific deps.
 dependencies {
@@ -256,7 +198,6 @@ dependencies {
 	testImplementation 'org.assertj:assertj-core:3.23.1'
 	testImplementation 'org.robolectric:robolectric:4.8.2'
 
-	errorprone "com.google.errorprone:error_prone_core:2.18.0"
-	errorproneJavac "com.google.errorprone:javac:9+181-r4173-1"
+//	errorprone "com.google.errorprone:error_prone_core:2.18.0"
+//	errorproneJavac "com.google.errorprone:javac:9+181-r4173-1"
 }
-

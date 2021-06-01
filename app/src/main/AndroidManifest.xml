@@ -40,7 +40,7 @@
 
 	<application
 		android:allowBackup="true"
-		android:backupAgent=".service.BackupAgent"
+		android:backupAgent="org.connectbot.service.BackupAgent"
 		android:description="@string/app_desc"
 		android:icon="@mipmap/icon"
 		android:killAfterRestore="true"

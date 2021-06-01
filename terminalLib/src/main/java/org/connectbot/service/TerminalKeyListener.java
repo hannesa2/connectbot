@@ -21,6 +21,8 @@ import java.io.IOException;
 import org.connectbot.bean.SelectionArea;
 import org.connectbot.util.PreferenceConstants;
 
+import org.connectbot.TerminalView;
+
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Configuration;
@@ -125,7 +127,7 @@ public class TerminalKeyListener implements OnKeyListener, OnSharedPreferenceCha
 	}
 
 	/**
-	 * Handle onKey() events coming down from a {@link org.connectbot.TerminalView} above us.
+	 * Handle onKey() events coming down from a {@link TerminalView} above us.
 	 * Modify the keys to make more sense to a host then pass it to the transport.
 	 */
 	@Override

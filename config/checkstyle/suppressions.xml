@@ -22,6 +22,6 @@
 <suppressions>
 	<suppress files="app/src/main/java/org/apache/harmony/niochar/charset/additional/IBM437\.java" checks=".*" />
 	<suppress files="app/src/main/java/org/keyczar/jce/EcCore\.java" checks="RegexpSinglelineJavaCheck"/>
-	<suppress files="app/src/main/java/com/google/ase/Exec\.java" checks="RegexpSinglelineJavaCheck"/>
-	<suppress files="app/src/main/java/de/mud/.+\.java" checks=".*" />
+	<suppress files="app/src/main/java/com/google/com.google.ase/Exec\.java" checks="RegexpSinglelineJavaCheck"/>
+	<suppress files="app/src/main/java/de/de.mud/.+\.java" checks=".*" />
 </suppressions>
