@@ -15,6 +15,7 @@ buildscript {
 
 plugins {
 	id 'com.diffplug.spotless' version '6.13.0'
+	id 'org.jetbrains.kotlin.jvm' version '1.6.20'
 }
 
 if (MAVEN_REPO_CACHE) {
@@ -61,5 +62,19 @@ task resolveDependencies {
 				}
 			}
 		}
+	}
+}
+
+dependencies {
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+compileKotlin {
+	kotlinOptions {
+		jvmTarget = "1.8"
+	}
+}
+compileTestKotlin {
+	kotlinOptions {
+		jvmTarget = "1.8"
 	}
 }
