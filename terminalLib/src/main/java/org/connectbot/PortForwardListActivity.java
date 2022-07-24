@@ -61,7 +61,8 @@ import android.widget.Toast;
  *
  * @author Kenny Root
  */
-public class PortForwardListActivity extends AppCompatListActivity {
+public class
+PortForwardListActivity extends AppCompatListActivity {
 	public final static String TAG = "CB.PortForwardListAct";
 
 	private static final int LISTENER_CYCLE_TIME = 500;
