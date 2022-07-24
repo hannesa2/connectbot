@@ -51,8 +51,8 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
 
-import com.connectbot.TerminalView;
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.viewpager.widget.PagerAdapter;
@@ -149,7 +149,8 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 
 	private ImageView mKeyboardButton;
 
-	@Nullable private ActionBar actionBar;
+	@Nullable
+	private ActionBar actionBar;
 	private boolean inActionBarMenu = false;
 	private boolean titleBarHide;
 	private boolean keyboardAlwaysVisible = false;
@@ -256,12 +257,10 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			if (BuildConfig.DEBUG) {
-				Log.d(TAG, "KeyRepeater.onTouch(" + v.getId() + ", " +
-						event.getAction() + ", " +
-						event.getActionIndex() + ", " +
-						event.getActionMasked() + ");");
-			}
+			Log.d(TAG, "KeyRepeater.onTouch(" + v.getId() + ", " +
+					event.getAction() + ", " +
+					event.getActionIndex() + ", " +
+					event.getActionMasked() + ");");
 			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 				mDown = false;
@@ -296,9 +295,7 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 		TerminalView terminal = adapter.getCurrentTerminalView();
 		if (terminal == null) return;
 
-		if (BuildConfig.DEBUG) {
-			Log.d(TAG, "onEmulatedKeyClicked(" + v.getId() + ")");
-		}
+		Log.d(TAG, "onEmulatedKeyClicked(" + v.getId() + ")");
 		TerminalKeyListener handler = terminal.bridge.getKeyHandler();
 		boolean hideKeys = false;
 
@@ -628,9 +625,9 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 				if (terminal == null)
 					return;
 				InputMethodManager inputMethodManager =
-					(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+						(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				inputMethodManager.toggleSoftInputFromWindow(terminal.getApplicationWindowToken(),
-					InputMethodManager.SHOW_FORCED, 0);
+						InputMethodManager.SHOW_FORCED, 0);
 				terminal.requestFocus();
 				hideEmulatedKeys();
 			}
@@ -689,16 +686,12 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 				@Override
 				public void run() {
 					final int xscroll = findViewById(R.id.button_f12).getRight();
-					if (BuildConfig.DEBUG) {
-						Log.d(TAG, "smoothScrollBy(toEnd[" + xscroll + "])");
-					}
+					Log.d(TAG, "smoothScrollBy(toEnd[" + xscroll + "])");
 					keyboardScroll.smoothScrollBy(xscroll, 0);
 					keyboardScroll.postDelayed(new Runnable() {
 						@Override
 						public void run() {
-							if (BuildConfig.DEBUG) {
-								Log.d(TAG, "smoothScrollBy(toStart[" + -xscroll + "])");
-							}
+							Log.d(TAG, "smoothScrollBy(toStart[" + -xscroll + "])");
 							keyboardScroll.smoothScrollBy(-xscroll, 0);
 						}
 					}, 500);
@@ -738,24 +731,24 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 		// How to detect keyboard visibility: http://stackoverflow.com/q/4745988
 		contentView = findViewById(android.R.id.content);
 		contentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-				@Override
-				public void onGlobalLayout() {
-					Rect r = new Rect();
-					contentView.getWindowVisibleDisplayFrame(r);
-					int screenHeight = contentView.getRootView().getHeight();
-					int keypadHeight = screenHeight - r.bottom;
+			@Override
+			public void onGlobalLayout() {
+				Rect r = new Rect();
+				contentView.getWindowVisibleDisplayFrame(r);
+				int screenHeight = contentView.getRootView().getHeight();
+				int keypadHeight = screenHeight - r.bottom;
 
-					if (keypadHeight > screenHeight * 0.15) {
-						// keyboard is opened
-						mKeyboardButton.setImageResource(R.drawable.ic_keyboard_hide);
-						mKeyboardButton.setContentDescription(getResources().getText(R.string.image_description_hide_keyboard));
-					} else {
-						// keyboard is closed
-						mKeyboardButton.setImageResource(R.drawable.ic_keyboard);
-						mKeyboardButton.setContentDescription(getResources().getText(R.string.image_description_show_keyboard));
-					}
+				if (keypadHeight > screenHeight * 0.15) {
+					// keyboard is opened
+					mKeyboardButton.setImageResource(R.drawable.ic_keyboard_hide);
+					mKeyboardButton.setContentDescription(getResources().getText(R.string.image_description_hide_keyboard));
+				} else {
+					// keyboard is closed
+					mKeyboardButton.setImageResource(R.drawable.ic_keyboard);
+					mKeyboardButton.setContentDescription(getResources().getText(R.string.image_description_show_keyboard));
 				}
-			});
+			}
+		});
 	}
 
 	private void addKeyRepeater(View view) {
@@ -928,7 +921,7 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 				@SuppressLint("InflateParams")  // Dialogs do not have a parent view.
 				final View resizeView = inflater.inflate(R.layout.dia_resize, null, false);
 				new androidx.appcompat.app.AlertDialog.Builder(
-								ConsoleActivity.this, R.style.AlertDialogTheme)
+						ConsoleActivity.this, R.style.AlertDialogTheme)
 						.setView(resizeView)
 						.setPositiveButton(R.string.button_resize, new DialogInterface.OnClickListener() {
 							@Override
