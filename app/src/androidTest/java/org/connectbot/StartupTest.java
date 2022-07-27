@@ -1,5 +1,7 @@
 package org.connectbot;
 
+import org.connectbot.lib.ConsoleActivity;
+import org.connectbot.lib.HostListActivity;
 import org.connectbot.util.HostDatabase;
 import org.connectbot.util.PreferenceConstants;
 import org.hamcrest.Matcher;

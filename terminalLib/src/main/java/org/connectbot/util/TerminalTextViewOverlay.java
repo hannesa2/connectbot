@@ -17,8 +17,8 @@
 
 package org.connectbot.util;
 
-import org.connectbot.R;
 import org.connectbot.TerminalView;
+import org.connectbot.lib.R;
 import org.connectbot.service.TerminalBridge;
 
 import android.content.Context;

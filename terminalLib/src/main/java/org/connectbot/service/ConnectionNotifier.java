@@ -17,10 +17,10 @@
 
 package org.connectbot.service;
 
-import org.connectbot.ConsoleActivity;
-import org.connectbot.HostListActivity;
-import org.connectbot.R;
+import org.connectbot.lib.ConsoleActivity;
+import org.connectbot.lib.HostListActivity;
 import org.connectbot.bean.HostBean;
+import org.connectbot.lib.R;
 import org.connectbot.util.HostDatabase;
 
 import android.annotation.TargetApi;

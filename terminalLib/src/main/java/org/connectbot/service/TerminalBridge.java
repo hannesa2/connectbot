@@ -24,11 +24,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.connectbot.R;
 import org.connectbot.TerminalView;
 import org.connectbot.bean.HostBean;
 import org.connectbot.bean.PortForwardBean;
 import org.connectbot.bean.SelectionArea;
+import org.connectbot.lib.R;
 import org.connectbot.transport.AbsTransport;
 import org.connectbot.transport.TransportFactory;
 import org.connectbot.util.HostDatabase;

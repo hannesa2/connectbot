@@ -23,8 +23,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
-import org.connectbot.R;
 import org.connectbot.bean.HostBean;
+import org.connectbot.lib.R;
 import org.connectbot.util.HostDatabase;
 
 import com.google.ase.Exec;

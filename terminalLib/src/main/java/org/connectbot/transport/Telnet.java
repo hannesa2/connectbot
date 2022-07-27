@@ -31,8 +31,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.connectbot.R;
 import org.connectbot.bean.HostBean;
+import org.connectbot.lib.R;
 import org.connectbot.service.TerminalBridge;
 import org.connectbot.service.TerminalManager;
 import org.connectbot.util.HostDatabase;

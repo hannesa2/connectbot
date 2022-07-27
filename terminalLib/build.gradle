@@ -7,7 +7,7 @@ android {
 	compileSdkVersion 30
 
 	defaultConfig {
-		minSdkVersion 16
+		minSdkVersion 21
 		targetSdkVersion 30
 		versionCode 1
 		versionName "1.0"
@@ -52,7 +52,8 @@ android {
 dependencies {
 	googleImplementation 'com.google.android.gms:play-services-basement:18.0.1'
 	ossImplementation 'org.conscrypt:conscrypt-android:2.5.2'
-
+	implementation "androidx.preference:preference:1.2.0"
+	
 	api 'org.connectbot:sshlib:2.2.19'
 	implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 	implementation 'androidx.core:core-ktx:1.5.0'
