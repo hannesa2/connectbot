@@ -195,7 +195,7 @@ public class TerminalManager extends Service implements BridgeDisconnectedListen
 
 		synchronized (bridges) {
 			if (bridges.size() > 0) {
-				tmpBridges = bridges.toArray(new TerminalBridge[bridges.size()]);
+				tmpBridges = bridges.toArray(new TerminalBridge[0]);
 			}
 		}
 
@@ -301,7 +301,6 @@ public class TerminalManager extends Service implements BridgeDisconnectedListen
 	/**
 	 * Find a connected {@link TerminalBridge} using its nickname.
 	 *
-	 * @param nickname
 	 * @return TerminalBridge that matches nickname
 	 */
 	public TerminalBridge getConnectedBridge(final String nickname) {
@@ -591,7 +590,6 @@ public class TerminalManager extends Service implements BridgeDisconnectedListen
 	 * the notification, it will bring them directly to the ConsoleActivity
 	 * displaying the host.
 	 *
-	 * @param host
 	 */
 	public void sendActivityNotification(HostBean host) {
 		if (!prefs.getBoolean(PreferenceConstants.BELL_NOTIFICATION, false))
