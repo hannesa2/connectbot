@@ -17,6 +17,7 @@
 
 package org.connectbot;
 
+import org.connectbot.lib.HostListActivity;
 import org.connectbot.service.TerminalManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;

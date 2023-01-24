@@ -33,16 +33,16 @@ def launchpadExportFile = rootProject.file('launchpad-export.tar.gz')
 def android2poUrl = 'git+https://github.com/miracle2k/android2po.git#egg=android2po'
 def android2poExec = "${condaDir}/bin/a2po"
 def android2poArgs = [
-		'--groups',
-		'strings',
-		'--android',
-		file(appDir + 'src/main/res'),
-		'--gettext',
-		localeDir,
-		'--template',
-		'fortune/fortune.pot',
-		'--layout',
-		'fortune/%(locale)s.po'
+	'--groups',
+	'strings',
+	'--android',
+	file(appDir + 'src/main/res'),
+	'--gettext',
+	localeDir,
+	'--template',
+	'fortune/fortune.pot',
+	'--layout',
+	'fortune/%(locale)s.po'
 ]
 
 task installAndroid2Po(type: Exec) {

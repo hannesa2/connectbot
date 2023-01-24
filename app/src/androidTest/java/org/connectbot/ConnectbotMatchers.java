@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.connectbot.bean.HostBean;
+import org.connectbot.lib.HostListActivity;
+import org.connectbot.lib.PubkeyListActivity;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.Assert;

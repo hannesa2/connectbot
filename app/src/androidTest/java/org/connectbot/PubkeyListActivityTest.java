@@ -21,6 +21,8 @@ import java.security.KeyPair;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
+import org.connectbot.lib.GeneratePubkeyActivity;
+import org.connectbot.lib.PubkeyListActivity;
 import org.connectbot.util.EntropyView;
 import org.connectbot.util.OnKeyGeneratedListener;
 import org.connectbot.util.PubkeyDatabase;

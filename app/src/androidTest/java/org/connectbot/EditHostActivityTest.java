@@ -17,6 +17,7 @@
 
 package org.connectbot;
 
+import org.connectbot.lib.EditHostActivity;
 import org.connectbot.util.PubkeyDatabase;
 import org.junit.Before;
 import org.junit.Rule;
