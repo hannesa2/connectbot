@@ -38,5 +38,6 @@ buildCache {
 
 if (!TRANSLATIONS_ONLY) {
 	include ':app'
+	include ':appSample'
 }
 include ':translations'

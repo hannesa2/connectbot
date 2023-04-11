@@ -7,7 +7,7 @@ buildscript {
 }
 
 plugins {
-	id 'com.android.application' version '8.1.4'
+	id 'com.android.library' version '8.1.4'
 	id 'com.github.ben-manes.versions' version '0.51.0'
 	id 'net.ltgt.errorprone' version '3.1.0'
 	id 'com.gladed.androidgitversion' version '0.4.14'
@@ -36,7 +36,7 @@ android {
 	compileSdk 33
 
 	defaultConfig {
-		applicationId "org.connectbot"
+		// applicationId "org.connectbot"
 		versionName androidGitVersion.name()
 		versionCode androidGitVersion.code()
 
@@ -74,7 +74,6 @@ android {
 	}
 	buildTypes {
 		release {
-			shrinkResources true
 			minifyEnabled true
 
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
@@ -95,7 +94,7 @@ android {
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg', 'proguard-debug.cfg'
 			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg', 'proguard-tests.cfg'
 
-			applicationIdSuffix ".debug"
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg', 'proguard-debug.cfg'
 			testCoverageEnabled true
 		}
 	}
@@ -235,11 +234,6 @@ dependencies {
 	testImplementation 'org.mockito:mockito-core:5.11.0'
 	testImplementation 'org.assertj:assertj-core:3.25.3'
 	testImplementation 'org.robolectric:robolectric:4.12.1'
-
-	// Needed for robolectric tests
-	testCompileOnly 'org.conscrypt:conscrypt-openjdk-uber:2.5.2'
-	testRuntimeOnly 'org.conscrypt:conscrypt-android:2.5.2'
-	testImplementation 'org.conscrypt:conscrypt-openjdk-uber:2.5.2'
 
 	errorprone "com.google.errorprone:error_prone_core:2.26.1"
 }
