@@ -15,9 +15,25 @@ on:
 jobs:
   build:
     name: Build and test
-    runs-on: macos-13 # emulator never starts on macOS 14 https://github.com/ReactiveCircus/android-emulator-runner/issues/392#issuecomment-2106167725
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-22.04 ]
+        api: [ 34 ]
+        abi: [ x86_64 ]
+        emulatorApi: [ 14 ]
+        tag: [ 'google_apis' ]
 
     steps:
+      - name: kvm support
+        run: |
+          egrep -c '(vmx|svm)' /proc/cpuinfo
+          id
+          sudo adduser $USER kvm
+          sudo chown -R $USER /dev/kvm
+          id
+
       - name: Checkout (with history)
         if: ${{ github.event_name == 'push' }}
         uses: actions/checkout@v4
@@ -40,8 +56,8 @@ jobs:
 
       - uses: gradle/actions/wrapper-validation@v4
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Install Android SDK
+        uses: hannesa2/action-android/install-sdk@0.1.16.7
 
       - name: Cache Gradle Home files
         uses: actions/cache@v4
@@ -53,14 +69,16 @@ jobs:
       - name: Build ConnectBot
         run: ./gradlew build bundleGoogleRelease
 
-      - name: Run instrument tests
-        uses: reactivecircus/android-emulator-runner@v2.33.0
+      - name: Android Emulator test
+        uses: hannesa2/action-android/emulator-run-cmd@0.1.16.7
         with:
-          api-level: 28
-          target: default
-          arch: x86_64
-          profile: Nexus 4
-          script: ./gradlew connectedCheck --continue
+          cmd: ./gradlew connectedCheck --continue
+          api: ${{ matrix.api }}
+          tag: ${{ matrix.tag }}
+          abi: ${{ matrix.abi }}
+          cmdOptions: -noaudio -no-boot-anim -no-window -metrics-collection
+          disableAnimations: true
+          bootTimeout: 720
 
       - name: Prepare release
         if: ${{ github.event_name == 'push' }}
